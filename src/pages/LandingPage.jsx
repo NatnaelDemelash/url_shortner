@@ -6,8 +6,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+  const [longUrl, setLongUrl] = useState('');
+  const navigate = useNavigate();
+
+  const handleShortenUrl = (e) => {
+    e.preventDefault();
+
+    if (longUrl) {
+      navigate(`/auth?createNew=${longUrl}`);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h2 className="my-10 sm:my-16 text-3xl md:text-6xl lg:text-7xl text-center font-extrabold">
@@ -17,10 +30,15 @@ const LandingPage = () => {
         A free tool to shorten URLs and generate short links URL shortener
         allows to create a shortened link making it easy to share
       </p>
-      <form className="sm:h-14 flex flex-col sm:flex-row w-full md:w-2/4 gap-3 mt-4 mb-2">
+      <form
+        onSubmit={handleShortenUrl}
+        className="sm:h-14 flex flex-col sm:flex-row w-full md:w-2/4 gap-3 mt-4 mb-2"
+      >
         <Input
           type="url"
           placeholder="Paste the long url here"
+          value={longUrl}
+          onChange={(e) => setLongUrl(e.target.value)}
           className="h-full flex-1 py-3 px-3"
         />
         <Button className="h-full">Shorten URL</Button>
