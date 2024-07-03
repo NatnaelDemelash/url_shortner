@@ -44,7 +44,7 @@ const LandingPage = () => {
         <Button className="h-full">Shorten URL</Button>
       </form>
       <img
-        src="/public/banner.png"
+        src="/banner.png"
         alt="Banner image"
         className="w-full my-11 md:px-11"
       />
